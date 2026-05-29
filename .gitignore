@@ -1,0 +1,21 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv
+venv/
+ENV/
+env/
+
+# --- Playwright ---
+# Capturas de pantalla, videos y trazas de las pruebas que fallen
+test-results/
+playwright-report/
+blob-report/
+playwright/.local-browsers/
+
+# --- Entorno y Configuración ---
+.env
+.vscode/
+.idea/
