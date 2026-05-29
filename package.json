@@ -1,0 +1,11 @@
+{
+  "name": "automationplaywright",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test:js": "node testJS.js"
+  },
+  "dependencies": {
+    "playwright": "^1.60.0"
+  }
+}

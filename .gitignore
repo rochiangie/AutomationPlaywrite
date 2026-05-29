@@ -19,3 +19,14 @@ playwright/.local-browsers/
 .env
 .vscode/
 .idea/
+
+# --- Node / JavaScript ---
+node_modules/
+package-lock.json
+
+# --- .NET ---
+bin/
+obj/
+
+# --- Generados de pruebas ---
+resultado_contacto.png

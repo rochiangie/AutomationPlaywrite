@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
@@ -7,20 +6,20 @@ using NUnit.Framework;
 namespace PlaywrightTests;
 
 [TestFixture]
-public class BusquedaTest : PageTest
+public class ContactoAngieTest : PageTest
 {
     [Test]
-    public async Task TestEjemploBusqueda()
+    public async Task TestContactoAngierochi()
     {
-        // 1. Navegar a la página de Google
-        await Page.GotoAsync("https://www.google.com");
+        await Page.GotoAsync("https://www.angierochi.com");
+        await Page.WaitForSelectorAsync("#contactForm");
 
-        // 2. Localizar la barra de búsqueda y escribir
-        var barraBusqueda = Page.GetByRole(AriaRole.Combobox, new() { Name = "Buscar" });
-        await barraBusqueda.FillAsync("Playwright C#");
-        await barraBusqueda.PressAsync("Enter");
+        await Page.FillAsync("#name", "Angie Test");
+        await Page.FillAsync("#email", "angie.test@example.com");
+        await Page.SelectOptionAsync("#service", new SelectOptionValue { Label = "QA Testing / Automatización" });
+        await Page.FillAsync("#message", "Hola Angie, este es un mensaje de prueba desde Playwright.");
 
-        // 3. Validar que el título sea el correcto
-        await Expect(Page).ToHaveTitleAsync(new Regex("Playwright C#"));
+        await Page.ClickAsync("button[type='submit']");
+        await Page.WaitForTimeoutAsync(3000);
     }
 }

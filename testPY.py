@@ -1,15 +1,22 @@
-import re
-from playwright.sync_api import Page, expect
+from playwright.sync_api import sync_playwright
 
-def test_ejemplo_busqueda(page: Page):
-    # 1. Navegar a la página de Google
-    page.goto("https://www.google.com")
-    
-    # 2. Localizar la barra de búsqueda y escribir
-    # (Playwright maneja las esperas por detrás)
-    barra_busqueda = page.get_by_role("combobox", name="Buscar")
-    barra_busqueda.fill("Playwright python")
-    barra_busqueda.press("Enter")
-    
-    # 3. Validar que el título de la página contiene lo que buscamos
-    expect(page).to_have_title(re.compile("Playwright python"))
+def test_contacto_angierochi():
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=False)
+        page = browser.new_page()
+
+        page.goto("https://www.angierochi.com", timeout=60000)
+        page.wait_for_selector('#contactForm', timeout=60000)
+
+        page.fill('#name', 'Angie Test')
+        page.fill('#email', 'angie.test@example.com')
+        page.select_option('#service', label='QA Testing / Automatización')
+        page.fill('#message', 'Hola Angie, este es un mensaje de prueba desde Playwright.')
+
+        page.click("button[type='submit']")
+        page.wait_for_timeout(3000)
+        page.screenshot(path='resultado_contacto.png')
+        browser.close()
+
+if __name__ == "__main__":
+    test_contacto_angierochi()
