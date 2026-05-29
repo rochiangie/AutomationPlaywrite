@@ -38,19 +38,3 @@ dotnet restore
 dotnet test
 ```
 
-## Qué no subir a Git
-- `node_modules/`
-- `bin/`
-- `obj/`
-- `resultado_contacto.png`
-- `package-lock.json` (si no deseas versionar el lock file local)
-
-Si no quieres subir tus cambios al repositorio remoto, usa:
-
-```powershell
-git restore README.md testCSharp.cs testJS.js testPY.py
-git clean -fd node_modules bin obj package-lock.json resultado_contacto.png PlaywrightTests.csproj
-```
-
-> Esto devolverá el proyecto al estado limpio del último commit y eliminará los archivos generados localmente.
-
